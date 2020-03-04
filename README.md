@@ -1,4 +1,4 @@
-# Thingful Server
+# Thingful Server (collaboration of Michael Ploughman & Oleg Cherniaev)
 
 ## Setting Up
 
