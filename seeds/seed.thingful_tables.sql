@@ -15,7 +15,7 @@ VALUES
   ('lexlor', 'Alex Taylor', 'Lex', '$2a$12$NgCfSgztuV9vOk.i2volMOtsZM7FkhIdPT1JMmXoRAzjEnxoZuyKW'), --'lex-password'
   ('wippy', 'Ping Won In', 'Ping', '$2a$12$jTMrVc/8Ds/RWE4A93Bo3OkSjNvYwPcOv1SE00r4LCAD0EzL1Es4i'); --'ping-password'
 
-INSERT INTO thingful_things (title, image, user_id, content)
+Idrop NSERT INTO thingful_things (title, image, user_id, content)
 VALUES
   ('Hand-Painted Rubber Ducky', 'https://loremflickr.com/750/300/landscape?random=1', 1, 'This ducky has been hand-painted and is now art. Therefore it is useless and cannot be put in water.'),
   ('Cloning Machine', 'https://loremflickr.com/750/300/landscape?random=2', 2, '100% guaranteed to occasionally work every time! Requires a 167.23v power outlet or a dragonscale battery (obtained separately by solving a riddle).'),
