@@ -261,9 +261,9 @@ function seedThingsTables(db, users, things, reviews=[]) {
   //       .into('thingful_things')
   //       .insert(things)
   //   )
-  //   .then(() =>
-  //     reviews.length && db.into('thingful_reviews').insert(reviews)
-  //   )
+    .then(() =>
+      reviews.length && db.into('thingful_reviews').insert(reviews)
+    )
 }
 
 function seedMaliciousThing(db, user, thing) {
