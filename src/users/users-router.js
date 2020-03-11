@@ -1,4 +1,5 @@
 const express = require('express')
+const path = require('path')
 const UserService = require('./users-service');
 
 const usersRouter = express.Router()
@@ -11,29 +12,43 @@ usersRouter
     for (const field of ['full_name', 'user_name', 'password'])
       if (!req.body[field])
         return res.status(400).json({
-          error:`Missing '${field}' in request body`
+          error: `Missing '${field}' in request body`
         })
 
     const passwordError = UserService.validatePassword(password)
 
-    if(passwordError) {
+    if (passwordError) {
       return res.status(400).json({ error: passwordError })
     }
-    console.log(`user_name in req.body`, user_name)
     UserService.hasUserWithUserName(
       req.app.get('db'),
       user_name
     )
       .then(hasUserWithUserName => {
-        console.log('hasUserWithUserName', hasUserWithUserName)
-        if(hasUserWithUserName) {
-          return res.status(400).json({ error: `Username already taken`})
+        if (hasUserWithUserName) {
+          return res.status(400).json({ error: `Username already taken` })
         }
-      })
+        return UserService.hashPassword(password)
+          .then(hashedPassword => {
+            const newUser = {
+              user_name,
+              password: hashedPassword,
+              full_name,
+              nickname,
+              date_created: 'now()',
+            }
 
-    res.send('ok')
+            return UserService.insertNewUser(
+              req.app.get('db'),
+              newUser
+            )
+              .then(user => {
+                res.status(201)
+                  .location(path.posix.join(req.originalUrl, `/${user.id}`))
+                  .json(UserService.serializeUser(user))
+              })
+          })
+      })
   })
-    
 
 module.exports = usersRouter
-
